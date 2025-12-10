@@ -161,6 +161,60 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
 #confirmationPopup a:visited {
     color: #6a0b0b !important;
 }
+
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 480px) {
+    body {
+        height: auto;
+        overflow-y: auto;
+        padding-bottom: 20px;
+    }
+
+    .svg-container {
+        position: relative;
+        top: 0;
+        left: 50%;
+        width: 90%;
+        max-width: 350px;
+        transform: translateX(-50%) scaleX(1);
+        height: auto;
+        z-index: -1;
+        margin: 0 auto;
+    }
+
+    .login-wrapper {
+        position: relative;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 20px;
+        width: 90%;
+        max-width: 350px;
+        box-sizing: border-box;
+    }
+
+    .left-message {
+        position: relative;
+        left: 50%;
+        top: auto;
+        transform: translateX(-50%);
+        text-align: center;
+        max-width: 90%;
+        margin-top: 15px;
+    }
+
+    .login-bottom-buttons {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: auto;
+        width: 90%;
+        max-width: 350px;
+        margin: 15px auto;
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+}
 </style>
 </head>
 <body>
@@ -224,8 +278,6 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
                 <div class="field-title">Inscrire votre mot de passe</div>
                 <div class="password-wrapper">
                     <input type="password" id="passwordField" placeholder="Inscrire votre mot de passe" required>
-                    
-                    <!-- SVG OEIL -->
                     <svg id="toggleEye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                         <path d="M2 32C2 32 14 12 32 12C50 12 62 32 62 32C62 32 50 52 32 52C14 52 2 32 2 32Z" fill="none" stroke="#6a0b0b" stroke-width="4"/>
                         <circle cx="32" cy="32" r="12" fill="none" stroke="#6a0b0b" stroke-width="4"/>
@@ -327,16 +379,14 @@ toggleButton();
 
 // ====== TOGGLE MOT DE PASSE (OEIL PARFAIT) ======
 const toggleEye = document.getElementById('toggleEye');
-
 toggleEye.addEventListener('click', () => {
-    const line = toggleEye.querySelector('line'); // La barre sur l'œil
-
+    const line = toggleEye.querySelector('line'); 
     if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';       // Montrer le mot de passe
-        line.style.opacity = "0";          // Retirer la barre
+        passwordInput.type = 'text';
+        line.style.opacity = "0";
     } else {
-        passwordInput.type = 'password';   // Cacher le mot de passe
-        line.style.opacity = "1";          // Remettre la barre
+        passwordInput.type = 'password';
+        line.style.opacity = "1";
     }
 });
 
