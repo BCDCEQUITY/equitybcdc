@@ -162,7 +162,7 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
     color: #6a0b0b !important;
 }
 
-/* --------------------- RESPONSIVE MOBILE (VERSION ANTÉRIEURE VALIDÉE) --------------------- */
+/* --------------------- RESPONSIVE MOBILE --------------------- */
 @media (max-width: 480px) {
     body {
         height: 100vh;
@@ -196,14 +196,35 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         max-width: 350px !important;
     }
 
+    /* Texte et logo sur le SVG pour mobile, même position que desktop */
     .left-message {
-        position: relative !important;
+        position: absolute !important;
+        top: 33% !important;
         left: 50% !important;
-        top: auto !important;
         transform: translateX(-50%) !important;
+        max-width: 350px !important;
         text-align: center !important;
-        max-width: 90% !important;
-        margin: 15px auto !important;
+        color: rgba(139,28,28,0.9) !important;
+    }
+
+    .left-message img {
+        width: 180px !important;
+        display: block !important;
+        margin: 0 auto 10px auto !important;
+    }
+
+    .left-message strong {
+        display: block !important;
+        font-size: 48px !important;
+        font-weight: 400 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .left-message span {
+        display: block !important;
+        font-size: 18px !important;
+        font-weight: 400 !important;
+        color: black !important;
     }
 
     .login-bottom-buttons {
@@ -276,7 +297,7 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
     <div class="left-message">
         <img src="images/logoE.png">
         <strong>Bienvenu à Equity BCDC online</strong>
-        <span>Equity online est le guichet unique pour tous vos besoins bancaires</span>
+        <span>Equity online est le guichet unique pour tous vos besoins bancaires ainsi que le logo</span>
     </div>
 
     <!-- Formulaire -->
