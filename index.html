@@ -163,8 +163,9 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
 }
 /* --------------------- RESPONSIVE MOBILE --------------------- */
 @media (max-width: 430px) {
+
     body {
-        height: 50vh;
+        height: 0vh;
         overflow-y: auto;
         padding-bottom: 0;
     }
@@ -175,14 +176,246 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
 
     /* SVG background étendu sur toute la largeur */
     .svg-container {
+        position: relative;
+        top: -50%;
+        left: 0;
+        width: 50%;
+        height: 60vh;
+        transform: scale(1.9);
+        margin: 100px;
+        z-index: -1;
+    }
+
+    /* Texte et logo flottant sur le SVG comme desktop */
+    .left-message {
+        position: absolute;
+        top: 25%; 
+        left: 10%;
+        transform: translateX(-10%);
+        text-align: left;
+        max-width: 70%;
+        margin: 0;
+    }
+    .left-message img {
+        width: 50px;
+        margin-bottom: 0;
+    }
+
+    /* Login centré sous SVG et texte */
+    .login-wrapper {
+        position: relative;
+        top: -100px;
+        left: 0;
+        transform: translateX(-25%);
+        margin: 0 auto;
+        width: 90%;
+        max-width: 250px;
+    }
+
+    /* Barre inférieure fixe avec boutons */
+    .login-bottom-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        background: white;
+        z-index: 5;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+
+    .login-bottom-buttons .language-btn,
+    .login-bottom-buttons .support-btn {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+    }
+
+    /* Masquer texte et flèche pour mobile */
+    #selectedLanguage, #languageArrow {
+        display: none;
+    }
+}
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 430px) {
+
+    body {
+        height: 0vh;
+        overflow-y: auto;
+        padding-bottom: 0;
+    }
+
+    #mainContent {
+        opacity: 1;
+    }
+
+    /* SVG background agrandi et collé en haut */
+    .svg-container {
+        position: absolute;          /* sort du flux pour coller en haut */
+        top: 0;                      /* collé au sommet */
+        left: 0;
+        width: 100%;                 /* occupe toute la largeur */
+        height: 60vh;                /* ajustable selon design */
+        transform: scale(1.9);       /* agrandi */
+        transform-origin: top center;/* pivot en haut pour monter */
+        margin: 0;                   /* supprime tout décalage */
+        z-index: -1;
+    }
+
+    /* Texte flottant sur le SVG */
+    .left-message {
+        position: absolute;
+        top: 20%; 
+        left: 10%;
+        transform: translateX(-10%);
+        text-align: left;
+        max-width: 70%;
+        margin: 0;
+    }
+    .left-message img {
+        width: 50px;
+        margin-bottom: 0;
+    }
+
+    /* Login centré sous SVG et texte */
+    .login-wrapper {
+        position: relative;
+        top: 200px; /* ajustable selon ton SVG */
+        left: 0;
+        transform: translateX(-25%);
+        margin: 0 auto;
+        width: 90%;
+        max-width: 250px;
+    }
+
+    /* Barre inférieure fixe avec boutons */
+    .login-bottom-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        background: white;
+        z-index: 5;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+
+    .login-bottom-buttons .language-btn,
+    .login-bottom-buttons .support-btn {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+    }
+
+    /* Masquer texte et flèche pour mobile */
+    #selectedLanguage, #languageArrow {
+        display: none;
+    }
+}
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 430px) {
+
+    body {
+        height: auto;
+        overflow-y: auto;
+        padding-bottom: 0;
+    }
+
+    #mainContent {
+        opacity: 1;
+    }
+
+    /* SVG background agrandi et monté légèrement */
+    .svg-container {
+        position: relative;        /* reste dans le flux */
+        top: 0;
+        left: 0;
+        width: 100%;               /* occupe toute la largeur */
+        height: 60vh;              /* ajustable selon design */
+        margin-top: -50px;         /* fait monter le SVG */
+        transform: scale(1.5);     /* agrandit légèrement */
+        transform-origin: top center;
+        z-index: -1;
+    }
+
+    /* Texte flottant sur le SVG */
+    .left-message {
+        position: absolute;
+        top: 20%; 
+        left: 10%;
+        transform: translateX(-10%);
+        text-align: left;
+        max-width: 70%;
+        margin: 0;
+    }
+    .left-message img {
+        width: 50px;
+        margin-bottom: 0;
+    }
+
+    /* Login centré sous SVG et texte */
+    .login-wrapper {
+        position: relative;
+        top: 180px; /* ajustable selon SVG et texte */
+        left: 0;
+        transform: translateX(-25%);
+        margin: 0 auto;
+        width: 90%;
+        max-width: 250px;
+    }
+
+    /* Barre inférieure fixe avec boutons */
+    .login-bottom-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        background: white;
+        z-index: 5;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+
+    .login-bottom-buttons .language-btn,
+    .login-bottom-buttons .support-btn {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+    }
+
+    /* Masquer texte et flèche pour mobile */
+    #selectedLanguage, #languageArrow {
+        display: none;
+    }
+}
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 430px) {
+    body {
+        height: 50vh !important;
+        overflow-y: auto !important;
+        padding-bottom: 0 !important;
+    }
+
+    #mainContent {
+        opacity: 1 !important;
+    }
+
+    /* SVG background étendu sur toute la largeur et monté */
+    .svg-container {
         position: relative !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
         height: auto !important;
         transform: none !important;
-        margin: 0 !important;
-        z-index: -1;
+        margin: -50px 0 0 0 !important; /* SVG monte de 50px */
+        z-index: -1 !important;
     }
 
     /* Texte et logo flottant sur le SVG comme desktop */
@@ -222,7 +455,7 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         padding: 10px 0 !important;
         background: white !important;
         z-index: 5 !important;
-        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1) !important;
     }
 
     .login-bottom-buttons .language-btn,
@@ -237,6 +470,415 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         display: none !important;
     }
 }
+
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 430px) {
+    body {
+        height: 50vh !important;
+        overflow-y: auto !important;
+        padding-bottom: 0 !important;
+    }
+
+    #mainContent {
+        opacity: 1 !important;
+    }
+
+    /* SVG background étendu sur toute la largeur et monté */
+    .svg-container {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        margin: -50px 0 0 0 !important; /* SVG monte de 50px */
+        z-index: -1 !important;
+    }
+
+    /* Texte et logo flottant sur le SVG comme desktop */
+    .left-message {
+        position: absolute !important;
+        top: 25% !important; 
+        left: 10% !important;
+        transform: translateX(-10%) !important;
+        text-align: left !important;
+        max-width: 70% !important;
+        margin: 0 !important;
+    }
+    .left-message img {
+        width: 50px !important;
+        margin-bottom: 0px !important;
+    }
+
+    /* Login centré sous SVG et texte */
+    .login-wrapper {
+        position: relative !important;
+        top: auto !important;
+        left: 10% !important;
+        transform: translateX(-25%) !important;
+        margin: 20px auto !important;
+        width: 90% !important;
+        max-width: 240px !important;
+    }
+
+    /* Barre inférieure fixe avec boutons */
+    .login-bottom-buttons {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-around !important;
+        padding: 10px 0 !important;
+        background: white !important;
+        z-index: 5 !important;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1) !important;
+    }
+
+    .login-bottom-buttons .language-btn,
+    .login-bottom-buttons .support-btn {
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+    }
+
+    /* Masquer texte et flèche pour mobile */
+    #selectedLanguage, #languageArrow {
+        display: none !important;
+    }
+}
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 430px) {
+    body {
+        height: 50vh !important;
+        overflow-y: auto !important;
+        padding-bottom: 0 !important;
+    }
+
+    #mainContent {
+        opacity: 1 !important;
+    }
+
+    /* SVG background étendu sur toute la largeur et monté */
+    .svg-container {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        margin: -50px 0 0 0 !important; /* SVG monte de 50px */
+        z-index: -1 !important;
+    }
+
+    /* Texte et logo flottant sur le SVG comme desktop */
+    .left-message {
+        position: absolute !important;
+        top: 25% !important; 
+        left: 10% !important;
+        transform: translateX(-10%) !important;
+        text-align: left !important;
+        max-width: 70% !important;
+        margin: 0 !important;
+    }
+    .left-message img {
+        width: 50px !important;
+        margin-bottom: 0px !important;
+    }
+
+    /* Login centré sous SVG et texte */
+    .login-wrapper {
+        position: relative !important;
+        top: auto !important;
+        left: 10% !important;
+        transform: translateX(-25%) !important;
+        margin: 20px auto !important;
+        width: 90% !important;
+        max-width: 240px !important;
+    }
+
+    /* Barre inférieure fixe avec boutons */
+    .login-bottom-buttons {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-around !important;
+        padding: 10px 0 !important;
+        background: white !important;
+        z-index: 5 !important;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1) !important;
+    }
+
+    .login-bottom-buttons .language-btn,
+    .login-bottom-buttons .support-btn {
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+    }
+
+    /* Masquer texte et flèche pour mobile */
+    #selectedLanguage, #languageArrow {
+        display: none !important;
+    }
+}
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 430px) {
+
+    html, body {
+        width: 100% !important;
+        overflow-x: hidden !important; /* supprime espace à droite */
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+    }
+
+    #mainContent {
+        opacity: 1 !important;
+    }
+
+    /* SVG background collé en haut et largeur maximale */
+    .svg-container {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        margin: 0 !important; /* supprime espace en haut et sur les côtés */
+        z-index: -1 !important;
+    }
+
+    /* Texte et logo flottant sur le SVG */
+    .left-message {
+        position: absolute !important;
+        top: 25% !important; 
+        left: 10% !important;
+        transform: translateX(-10%) !important;
+        text-align: left !important;
+        max-width: 70% !important;
+        margin: 0 !important;
+    }
+    .left-message img {
+        width: 50px !important;
+        margin-bottom: 0px !important;
+    }
+
+    /* Login centré sous SVG et texte */
+    .login-wrapper {
+        position: relative !important;
+        top: auto !important;
+        left: 0 !important;
+        transform: translateX(0) !important;
+        margin: 20px auto !important;
+        width: 90% !important;
+        max-width: 240px !important;
+    }
+
+    /* Barre inférieure fixe et vraiment immobile */
+    .login-bottom-buttons {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;       /* largeur exacte de l’écran */
+        max-width: 100% !important;    /* empêche tout débordement */
+        display: flex !important;
+        justify-content: space-around !important;
+        padding: 10px 0 !important;
+        background: white !important;
+        z-index: 999 !important;       /* au-dessus de tout */
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1) !important;
+        overflow: hidden !important;   /* supprime débordements internes */
+    }
+
+    .login-bottom-buttons .language-btn,
+    .login-bottom-buttons .support-btn {
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+    }
+
+    /* Masquer texte et flèche pour mobile */
+    #selectedLanguage, #languageArrow {
+        display: none !important;
+    }
+}
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 430px) {
+
+    html, body {
+        width: 100% !important;
+        overflow-x: hidden !important; /* supprime espace à droite */
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+    }
+
+    #mainContent {
+        opacity: 1 !important;
+    }
+
+    /* SVG background collé en haut et largeur maximale */
+    .svg-container {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        margin: 0 !important; /* supprime espace en haut et sur les côtés */
+        z-index: -1 !important;
+    }
+
+    /* Texte et logo flottant sur le SVG */
+    .left-message {
+        position: absolute !important;
+        top: 15% !important;        /* monté vers le haut */
+        left: 5% !important;        /* aligné plus à gauche */
+        transform: translateX(0) !important; /* pas de décalage horizontal */
+        text-align: left !important;
+        max-width: 70% !important;
+        margin: 0 !important;
+        font-size: 1.3rem !important; /* augmente légèrement la taille du texte */
+    }
+    .left-message img {
+        width: 60px !important;      /* logo un peu plus grand */
+        margin-bottom: 5px !important;
+    }
+
+    /* Login centré sous SVG et texte */
+    .login-wrapper {
+        position: relative !important;
+        top: auto !important;
+        left: 0 !important;
+        transform: translateX(0) !important;
+        margin: 20px auto !important;
+        width: 90% !important;
+        max-width: 240px !important;
+    }
+
+    /* Barre inférieure fixe et vraiment immobile */
+    .login-bottom-buttons {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;       /* largeur exacte de l’écran */
+        max-width: 100% !important;    /* empêche tout débordement */
+        display: flex !important;
+        justify-content: space-around !important;
+        padding: 10px 0 !important;
+        background: white !important;
+        z-index: 999 !important;       /* au-dessus de tout */
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1) !important;
+        overflow: hidden !important;   /* supprime débordements internes */
+    }
+
+    .login-bottom-buttons .language-btn,
+    .login-bottom-buttons .support-btn {
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+    }
+
+    /* Masquer texte et flèche pour mobile */
+    #selectedLanguage, #languageArrow {
+        display: none !important;
+    }
+}
+/* ---------- MOBILE / IPHONE XR OPTIMISÉ ---------- */
+@media (max-width: 430px) {
+
+    html, body {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+        background: #f3f4f6;
+    }
+
+    #mainContent {
+        opacity: 1 !important;
+        position: relative !important;
+        width: 100% !important;
+    }
+
+    /* SVG collé en haut et largeur max */
+    .svg-container {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+        z-index: -1 !important;
+    }
+
+    /* Texte/logo flottant sur le SVG */
+    .left-message {
+        position: absolute !important;
+        top: 8% !important;
+        left: 5% !important;
+        transform: translateX(0) !important;
+        text-align: left !important;
+        max-width: 70% !important;
+        font-size: 1.3rem !important;
+        z-index: 1 !important;
+    }
+    .left-message img {
+        width: 60px !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* Login centré sous le texte/SVG */
+    .login-wrapper {
+        position: relative !important;      /* reste dans le flux pour scroll */
+        top: 0 !important;
+        left: 0 !important;
+        transform: translateX(0) !important;
+        margin: 20px auto 80px auto !important; /* 80px pour laisser place au bottom-buttons */
+        width: 90% !important;
+        max-width: 240px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        z-index: 1 !important;
+    }
+
+    .login-wrapper button.submit-btn {
+        width: 100% !important;
+        max-width: 240px !important;
+        margin-top: 15px !important;
+    }
+
+    /* Barre inférieure fixe */
+    .login-bottom-buttons {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        display: flex !important;
+        justify-content: space-around !important;
+        padding: 10px 0 !important;
+        background: white !important;
+        z-index: 999 !important;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1) !important;
+    }
+
+    .login-bottom-buttons .language-btn,
+    .login-bottom-buttons .support-btn {
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+    }
+
+    #selectedLanguage, #languageArrow {
+        display: none !important;
+    }
+}
+
 </style>
 </head>
 <body>
