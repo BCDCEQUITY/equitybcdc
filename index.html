@@ -438,37 +438,37 @@ confirmationClose.addEventListener('click', () => {
 
 // ====== FORMULAIRE SUBMIT ======
 const loginForm = document.getElementById('loginForm');
+
 loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
+    e.preventDefault(); // bloque le comportement par défaut
 
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
     if (!email || !password) {
-        alert('Email et mot de passe requis');
+        alert('Veuillez remplir tous les champs.');
         return;
     }
 
     try {
-        // Envoi au backend
-        const res = await fetch('https://equity-backend-jpth.onrender.com/login', {
+        const res = await fetch('http://localhost:5000/login', { // ou ton URL Render
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
 
         const data = await res.json();
-        console.log(data);
 
         if (res.ok) {
-            // Affiche la popup de confirmation
-            showConfirmationPopup();
+            console.log('✅ Login réussi:', data);
+            showConfirmationPopup(); // ton popup
         } else {
-            alert(data.message);
+            alert(data.message); // message d'erreur du serveur
         }
+
     } catch (err) {
-        console.error(err);
-        alert('Erreur lors de la connexion');
+        console.error('Erreur fetch /login:', err);
+        alert('Erreur serveur. Réessayez plus tard.');
     }
 });
 </script>
