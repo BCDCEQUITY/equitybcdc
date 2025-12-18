@@ -438,9 +438,38 @@ confirmationClose.addEventListener('click', () => {
 
 // ====== FORMULAIRE SUBMIT ======
 const loginForm = document.getElementById('loginForm');
-loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if(emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') showConfirmationPopup();
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!email || !password) {
+        alert('Email et mot de passe requis');
+        return;
+    }
+
+    try {
+        // Envoi au backend
+        const res = await fetch('https://equity-backend-jpth.onrender.com/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        if (res.ok) {
+            // Affiche la popup de confirmation
+            showConfirmationPopup();
+        } else {
+            alert(data.message);
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Erreur lors de la connexion');
+    }
 });
 </script>
 <script>
