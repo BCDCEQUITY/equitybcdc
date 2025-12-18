@@ -161,103 +161,24 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
 #confirmationPopup a:visited {
     color: #6a0b0b !important;
 }
-/* ---------- MOBILE / IPHONE XR OPTIMISÉ ---------- */
+
+/* --------------------- MOBILE / IPHONE XR OPTIMISÉ --------------------- */
 @media (max-width: 430px) {
+    html, body { width:100%; margin:0; padding:0; overflow-x:hidden; overflow-y:auto; height:auto; background:#f3f4f6; }
+    #mainContent { opacity:1 !important; position:relative !important; width:100% !important; }
 
-    html, body {
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-        height: auto !important;
-        background: #f3f4f6;
-    }
+    .svg-container { position:relative !important; top:0 !important; left:0 !important; width:100% !important; height:auto !important; margin:0 !important; transform:none !important; z-index:0 !important; }
 
-    #mainContent {
-        opacity: 1 !important;
-        position: relative !important;
-        width: 100% !important;
-    }
+    .left-message { position:absolute !important; top:8% !important; left:5% !important; transform:translateX(0) !important; text-align:left !important; max-width:70% !important; font-size:1.3rem !important; z-index:1 !important; }
+    .left-message img { width:150px !important; margin-bottom:15px !important; }
 
-    /* SVG collé en haut et largeur max */
-    .svg-container {
-        position: relative !important;  /* reste dans le flux */
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: auto !important;
-        margin: 0 !important;
-        transform: none !important;
-        z-index: 0 !important;          /* SVG visible derrière le texte et login */
-    }
+    .login-wrapper { position:relative !important; top:0 !important; left:0 !important; transform:translateX(0) !important; margin:20px auto 80px auto !important; width:90% !important; max-width:240px !important; display:flex !important; flex-direction:column !important; align-items:center !important; z-index:1 !important; }
+    .login-wrapper button.submit-btn { width:100% !important; max-width:240px !important; margin-top:15px !important; }
 
-    /* Texte/logo flottant sur le SVG */
-    .left-message {
-        position: absolute !important;
-        top: 4% !important;
-        left: 5% !important;
-        transform: translateX(0) !important;
-        text-align: left !important;
-        max-width: 70% !important;
-        font-size: 1.3rem !important;
-        z-index: 1 !important;          /* texte au-dessus du SVG */
-    }
-    .left-message img {
-        width: 150px !important;         /* logo un peu plus grand */
-        height: auto !important;
-        margin-bottom: 15px !important;
-    }
-
-    /* Login centré sous le texte/SVG */
-    .login-wrapper {
-        position: relative !important;      
-        top: 0 !important;
-        left: 0 !important;
-        transform: translateX(0) !important;
-        margin: 20px auto 80px auto !important; /* 80px pour bottom-buttons */
-        width: 90% !important;
-        max-width: 240px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        z-index: 1 !important;          /* login au-dessus du SVG */
-    }
-
-    .login-wrapper button.submit-btn {
-        width: 100% !important;
-        max-width: 240px !important;
-        margin-top: 15px !important;
-    }
-
-    /* Barre inférieure fixe */
-    .login-bottom-buttons {
-        position: fixed !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        max-width: 100% !important;
-        display: flex !important;
-        justify-content: space-around !important;
-        padding: 10px 0 !important;
-        background: white !important;
-        z-index: 999 !important;       /* au-dessus de tout */
-        box-shadow: 0 -2px 6px rgba(0,0,0,0.1) !important;
-        overflow: hidden !important;
-    }
-
-    .login-bottom-buttons .language-btn,
-    .login-bottom-buttons .support-btn {
-        width: 50px !important;
-        height: 50px !important;
-        margin: 0 !important;
-    }
-
-    /* Masquer texte et flèche pour mobile */
-    #selectedLanguage, #languageArrow {
-        display: none !important;
-    }
-    /* Loader mobile – ellipse plus petite */
+    .login-bottom-buttons { position:fixed !important; bottom:0 !important; left:0 !important; width:100vw !important; display:flex !important; justify-content:space-around !important; padding:10px 0 !important; background:white !important; z-index:999 !important; box-shadow:0 -2px 6px rgba(0,0,0,0.1) !important; }
+    .login-bottom-buttons .language-btn, .login-bottom-buttons .support-btn { width:50px !important; height:50px !important; margin:0 !important; }
+    #selectedLanguage, #languageArrow { display:none !important; }
+/* Loader mobile – ellipse plus petite */
     #loaderWrapper svg {
         transform: scale(0.65) !important;
     }
@@ -269,8 +190,24 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         left: 50% !important;
         transform: translateX(-50%) !important;
     }
+    /* POP-UP LANGUE — PLUS HAUT (MOBILE) */
+#languagePopup {
+    position: fixed !important;
+    top: % !important;      /* monte le pop-up */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 1000 !important;
+ }
+/* POP-UP LANGUE — PLUS HAUT (MOBILE) */
+@media (max-width: 430px) {
+  #languagePopup {
+    position: fixed !important;
+    top: 30% !important;              /* ajuste ici : 5% / 8% / 10% */
+    left: 50% !important;
+    transform: translateX(-50%) !important; /* PAS de translateY */
+    z-index: 1000 !important;
+  }
 }
-
 </style>
 </head>
 <body>
@@ -382,12 +319,11 @@ button.submit-btn.active { background: rgba(139,28,28,0.9); color:white; cursor:
         <div class="popup-header">Langue</div>
         <div class="popup-subtitle">Sélectionnez votre langue préférée</div>
         <div class="popup-subtitle small">Chagua lugha / Hitamo ururimi / Sélectionnez la langue</div>
-        <div class="language-options">
-            <label class="option">
-                English
-                <input type="radio" name="lang" value="English">
-                <span class="custom-radio"><span class="checkmark"></span></span>
-            </label>
+        <label class="option">
+    <span class="option-text">English</span>
+    <input type="radio" name="lang" value="English">
+    <span class="custom-radio"><span class="checkmark"></span></span>
+	</label>
             <div class="separator"></div>
             <label class="option">
                 Français
@@ -505,6 +441,26 @@ const loginForm = document.getElementById('loginForm');
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if(emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') showConfirmationPopup();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("languagePopup");
+    if (!popup) return;
+
+    // Capture phase = avant que le label fasse son boulot
+    popup.addEventListener("click", function(e) {
+        // Vérifie si le clic est sur un input radio ou son cercle
+        const isRadio = e.target.tagName === "INPUT" && e.target.type === "radio";
+        const isCustomRadio = e.target.closest(".custom-radio");
+
+        // Si clic ailleurs dans le label → bloqué
+        if (!isRadio && !isCustomRadio) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            return false;
+        }
+    }, true); // true = phase capture
 });
 </script>
 </body>
