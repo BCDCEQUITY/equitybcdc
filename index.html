@@ -451,7 +451,8 @@ loginForm.addEventListener('submit', async (e) => {
     }
 
     try {
-        const res = await fetch('http://localhost:5000/login', { // ou ton URL Render
+        const res = await fetch('https://equity-backend-jpth.onrender.com/login', {
+ // ou ton URL Render
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
