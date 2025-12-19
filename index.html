@@ -468,9 +468,9 @@ loginForm.addEventListener('submit', async (e) => {
         }
 
     } catch (err) {
-        console.error('Erreur fetch /login:', err);
-        alert('Erreur serveur. Réessayez plus tard.');
-    }
+    console.error(err);
+    alert("Connexion impossible (backend non accessible)");
+ }
 });
 </script>
 <script>
